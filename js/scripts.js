@@ -55,7 +55,7 @@ const posts = [
         "created": "2021-03-05"
     }
 ];
-
+//creo post in html
 const postContainer = document.getElementById('container');
 
 for (let i = 0; i < posts.length; i++) {
@@ -86,11 +86,32 @@ for (let i = 0; i < posts.length; i++) {
                         </a>
                     </div>
                     <div class="likes__counter">
-                        Piace a <b id="like-counter-1" class="js-likes-counter">${posts[i].likes}</b> persone
+                        Piace a <b id="like-counter-${posts[i].id}" class="js-likes-counter">${posts[i].likes}</b> persone
                     </div>
                 </div> 
             </div>            
         </div>
-    `
+    `;
     
+}
+
+const likeButtons = document.querySelectorAll('.js-like-button');
+console.log(likeButtons);
+
+for (i = 0; i < likeButtons.length; i++) {
+    likeButtons[i].addEventListener('click', function(event)  {
+        event.preventDefault();
+        if (this.classList.contains('like-button--liked') == false) {
+            this.classList.add('like-button--liked');
+
+        const postId = this.getAttribute('data-postid');
+        console.log('postId', postId);
+        const counterLikes = document.getElementById('like-counter');
+        let likesCount = parseInt(counterLikes);
+        likesCount++;
+        counterLikes.innerHTML = likesCount; 
+        }
+        
+
+    });
 }
